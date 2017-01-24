@@ -6,11 +6,10 @@ namespace ConsoleApplication
     {
         public static void Main(string[] args)
         {
+            int[] nums = new int[]{3,3,5,0,0,3,1,4};
             Console.WriteLine("Hello World!");
-            RomanNumerals test = new RomanNumerals();
-            Console.WriteLine(test.IntToRoman(99));
-            // NumberPalidrome test = new NumberPalidrome();
-            // Console.WriteLine(test.isPalidrome(-2147483648));
+            StockMarketTiming test = new StockMarketTiming();
+            Console.WriteLine(test.maxProfit(nums));
         }
     }
 }
