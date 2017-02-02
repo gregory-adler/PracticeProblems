@@ -9,7 +9,6 @@ namespace Library {
                 if (original[i].Equals('-')){
                     reverse = original[i] + reverse;
                     return false;
-                    continue;
                 }
                 reverse = reverse + original[i];
             }

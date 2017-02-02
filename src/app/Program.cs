@@ -1,5 +1,5 @@
 ﻿using System;
-using Libary;
+using Library; 
 namespace ConsoleApplication
 {
     public class Program
@@ -7,15 +7,11 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            MessageViewModel testView = new MessageViewModel();
-            testView.MessageID = 4;
-            testView.Subject = "Hello";
-            testView.Contents = "person";
-            testView.Sender = "greg";
-            testView.Recipient = "another person";
-            testView.Read = false;
-            Message testMessage = testView.generateMessage();
-            Console.WriteLine(testMessage.Contents);
+            ConstructRectangle test = new ConstructRectangle();
+            int[] answer = new int [2];
+            answer = test.constructRectangle(4);
+            Console.WriteLine(answer[0]);
+            Console.WriteLine(answer[1]);
         }
     }
 }

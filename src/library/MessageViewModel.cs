@@ -5,27 +5,27 @@ namespace Libary {
         public int MessageID {get; set;}
         public string Subject{get; set;}
         public string Contents {get; set;}
-        public DateTime SentTime {get; set;}
+        public DateTime SentTime {get; set;} = DateTime.Now;
         public DateTime ModifiedTime {get; set;}
         public string Sender{get; set;}
         public string Recipient{get; set;}
         public bool Read {get; set;}
         public DateTime ReadTime {get; set;}
 
-        public Message Message{get; set;}
+        public Message MessageToSend{get; set;}
 
         public Message generateMessage(){
-            this.Message = new Message();
-            this.Message.MessageID = this.MessageID;
-            this.Message.Subject = this.Subject;
-            this.Message.Contents = this.Contents;
-            this.Message.SentTime = this.SentTime;
-            this.Message.ModifiedTime = this.ModifiedTime;
-            this.Message.Sender = this.Sender;
-            this.Message.Recipient = this.Recipient;
-            this.Message.Read = this.Read;
-            this.Message.ReadTime = this.ReadTime;
-            return this.Message;
+            MessageToSend = new Message();
+            MessageToSend.MessageID = MessageID;
+            MessageToSend.Subject = Subject;
+            MessageToSend.Contents = Contents;
+            MessageToSend.SentTime = SentTime;
+            MessageToSend.ModifiedTime = ModifiedTime;
+            MessageToSend.Sender = Sender;
+            MessageToSend.Recipient = Recipient;
+            MessageToSend.Read = Read;
+            MessageToSend.ReadTime = ReadTime;
+            return MessageToSend;
         }
 
     }
