@@ -6,10 +6,16 @@ namespace ConsoleApplication
     {
         public static void Main(string[] args)
         {
-            int[] nums = new int[]{3,3,5,0,0,3,1,4};
             Console.WriteLine("Hello World!");
-            Message test = new Message();
-            Console.WriteLine(test.MessageID);
+            MessageViewModel testView = new MessageViewModel();
+            testView.MessageID = 4;
+            testView.Subject = "Hello";
+            testView.Contents = "person";
+            testView.Sender = "greg";
+            testView.Recipient = "another person";
+            testView.Read = false;
+            Message testMessage = testView.generateMessage();
+            Console.WriteLine(testMessage.Contents);
         }
     }
 }
