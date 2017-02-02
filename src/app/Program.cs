@@ -1,5 +1,5 @@
 ﻿using System;
-using Library; 
+using Libary;
 namespace ConsoleApplication
 {
     public class Program
@@ -8,8 +8,8 @@ namespace ConsoleApplication
         {
             int[] nums = new int[]{3,3,5,0,0,3,1,4};
             Console.WriteLine("Hello World!");
-            StockMarketTiming test = new StockMarketTiming();
-            Console.WriteLine(test.maxProfit(nums));
+            Message test = new Message();
+            Console.WriteLine(test.MessageID);
         }
     }
 }
