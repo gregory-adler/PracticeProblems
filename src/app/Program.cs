@@ -7,11 +7,12 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            ConstructRectangle test = new ConstructRectangle();
-            int[] answer = new int [2];
-            answer = test.constructRectangle(4);
-            Console.WriteLine(answer[0]);
-            Console.WriteLine(answer[1]);
+            Teemo test = new Teemo();
+            int[] parameter = new int[] { 1, 2 };
+            int answer;
+            answer = test.FindPoisonedDuration(parameter, 2);
+            Console.WriteLine(answer);
+            Console.ReadKey();
         }
     }
 }
