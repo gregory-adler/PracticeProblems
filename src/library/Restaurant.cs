@@ -4,9 +4,9 @@ namespace Library{
 
     public class Restaurant{
         public Host Host{get; set;}
-        private List<Server> Servers {get; set;}
-        private List<Party> Parties{get;set;}
-        private List<Table> Tables{get;set;}
+        public List<Server> Servers {get; set;}
+        public List<Party> Parties{get;set;}
+        public List<Table> Tables{get;set;}
 
 
     }
@@ -27,9 +27,16 @@ namespace Library{
         public string Name {get; set;}
         public int Salary{get; set;}
         public string Type {get; set;}
+
+        public void EmployeeProperties(){
+            Console.WriteLine("EmployeeProperties");
+            Console.WriteLine($"    Type = {Type}");
+            Console.WriteLine($"    Name = {Name}");
+            Console.WriteLine($"    Salary = {Salary}$");
+        }
     }
     public class Host: Employee{
-        public Host(string name, int salary){
+        public Host(string name, int salary, string type){
             this.Name = name;
             this.Salary = salary;
             this.Type = "Host";

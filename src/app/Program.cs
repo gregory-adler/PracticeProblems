@@ -8,8 +8,8 @@ namespace ConsoleApplication
         {
             Console.WriteLine("Hello World!");
             Restaurant restaurant = new Restaurant();
-            restaurant.Host = new Host ("HostName", 4);
-            Console.WriteLine(restaurant.Host.Name);
+            restaurant.Host = new Host ("HostName", 4, "host");
+            restaurant.Host.EmployeeProperties();
         }
     }
 }
