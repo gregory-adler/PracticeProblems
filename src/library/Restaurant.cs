@@ -8,6 +8,15 @@ namespace Library{
         public List<Party> Parties{get;set;}
         public List<Table> Tables{get;set;}
 
+        public Restaurant(){
+            Servers = new List<Server>();
+        }
+
+        public void printServers(){
+            for (int i = 0; i< Servers.Count; i++){
+                Servers[i].EmployeeProperties();
+            }
+        }
 
     }
     public class Party: Restaurant{
@@ -29,7 +38,7 @@ namespace Library{
         public string Type {get; set;}
 
         public void EmployeeProperties(){
-            Console.WriteLine("EmployeeProperties");
+            Console.WriteLine($"{Name}Properties");
             Console.WriteLine($"    Type = {Type}");
             Console.WriteLine($"    Name = {Name}");
             Console.WriteLine($"    Salary = {Salary}$");
@@ -44,7 +53,7 @@ namespace Library{
 
     }
     public class Server : Employee{
-        public Server(string name, int salary){
+        public Server(string name, int salary, string type){
             this.Name = name;
             this.Salary = salary;
             this.Type = "Server";
