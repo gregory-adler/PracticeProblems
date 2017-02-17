@@ -7,12 +7,9 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Teemo test = new Teemo();
-            int[] parameter = new int[] { 1, 2 };
-            int answer;
-            answer = test.FindPoisonedDuration(parameter, 2);
-            Console.WriteLine(answer);
-            Console.ReadKey();
+            Restaurant restaurant = new Restaurant();
+            restaurant.Host = new Host ("HostName", 4);
+            Console.WriteLine(restaurant.Host.Name);
         }
     }
 }
