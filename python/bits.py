@@ -7,4 +7,4 @@ def bits (a):
 			count+=1
 
 	return count
-print(bits(7))
+print(bits(11))
