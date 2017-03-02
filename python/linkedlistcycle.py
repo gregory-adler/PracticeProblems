@@ -26,6 +26,9 @@ def doesLoop(node):
 			return currentItem.val
 		dictionary[currentItem] = 1
 		currentItem = currentItem.next
+
+	if currentItem in dictionary:
+		return currentItem.val
 	return "None"
 
 def deleteDuplicates(node):
@@ -42,8 +45,8 @@ def deleteDuplicates(node):
 		currentItem = currentItem.next
 
 	if currentItem.val in dictionary:
-			previous.next = currentItem.next
-			print "Duplicate"
+		previous.next = currentItem.next
+		print "Duplicate"
 	dictionary[currentItem.val] = 1
 	previous = currentItem
 
