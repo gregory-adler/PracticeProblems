@@ -14,11 +14,10 @@ def setup():
 	nodeOne.next = nodeTwo
 	nodeTwo.next = nodeThree
 	nodeThree.next = nodeFour
-	nodeFour.next = nodeThree
 	return nodeOne
 
 
-def solution(node):
+def doesLoop(node):
 	dictionary = dict()
 	currentItem = node
 
@@ -29,6 +28,19 @@ def solution(node):
 		currentItem = currentItem.next
 	return "None"
 
+def deleteDuplicates(node):
+	dictionary = dict()
+	currentItem = node
+	previous = None
+
+	while (currentItem.next != None):
+		if currentItem.val in dictionary:
+			previous.next = currentItem.next
+			print "Duplicate"
+		dictionary[currentItem.val] = 1
+		previous = currentItem
+		currentItem = currentItem.next
+
 
 nodeOne = setup()
-print(solution(nodeOne))
+print(deleteDuplicates(nodeOne))
