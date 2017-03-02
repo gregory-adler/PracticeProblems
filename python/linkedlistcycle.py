@@ -8,8 +8,8 @@ def setup():
 
 	nodeOne = ListNode(1)
 	nodeTwo = ListNode(2)
-	nodeThree = ListNode(3)
-	nodeFour = ListNode(4)
+	nodeThree = ListNode(2)
+	nodeFour = ListNode(2)
 
 	nodeOne.next = nodeTwo
 	nodeTwo.next = nodeThree
@@ -40,6 +40,12 @@ def deleteDuplicates(node):
 		dictionary[currentItem.val] = 1
 		previous = currentItem
 		currentItem = currentItem.next
+
+	if currentItem.val in dictionary:
+			previous.next = currentItem.next
+			print "Duplicate"
+	dictionary[currentItem.val] = 1
+	previous = currentItem
 
 
 nodeOne = setup()
