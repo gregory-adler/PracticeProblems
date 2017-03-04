@@ -7,8 +7,8 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            listPractice listPractice = new listPractice();
-            listPractice.setup();
+            dictionaryPractice variable = new dictionaryPractice();
+            variable.setup();
         }
     }
 }
