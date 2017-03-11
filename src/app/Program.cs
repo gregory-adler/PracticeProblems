@@ -10,6 +10,7 @@ namespace ConsoleApplication
             Server test = new Server("john", 5);
             Table testTable = new Table(4);
             Party testParty = new Party(4);
+            testParty.Print();
             test.Print();
         }
     }

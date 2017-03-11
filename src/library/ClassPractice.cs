@@ -81,6 +81,11 @@ namespace Library
            setParty(_count);
        }
        public void setParty(int _count){
+            List<Customer> _Customers = new List<Customer>();
+            for (int i = 1; i<= _count; i++){
+                _Customers.Add(new Customer(i));
+            }
+           this.Customers = _Customers;
        }
 
        public List<Customer> getParty(){
