@@ -8,7 +8,7 @@ namespace ConsoleApplication
         {
             Console.WriteLine("Hello World!");
             Server test = new Server("john", 5);
-            Console.WriteLine(test.getAge());
+            test.Print();
         }
     }
 }

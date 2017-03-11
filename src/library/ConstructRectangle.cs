@@ -1,5 +1,4 @@
 namespace Library {
-    using System;
     public class ConstructRectangle{
         public int[] constructRectangle(int area){
             int difference = area;
