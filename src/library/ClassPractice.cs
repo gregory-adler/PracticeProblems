@@ -65,6 +65,7 @@ namespace Library
     }
     public class Server :Employee
     {
+        private Table table {get;set;}
         public Server(string _name, int _age)
         {
             setName(_name);
@@ -72,13 +73,28 @@ namespace Library
             setType("Server");
 
         }
+
+        public void assignTable(Table _table){
+            this.table = _table;
+        }
+        public Table getTable(){
+            return this.table;
+        }
     }
 
     public class Party{
        private List <Customer> Customers {get;set;}
+       private Table table {get; set;}
 
-       public Party(int _count){
+       private Boolean waiting {get; set;}
+
+       public Party(int _count, Boolean _waiting){
            setParty(_count);
+           setWaiting(_waiting);
+       }
+       public Party(int _count, Table _table){
+           setParty(_count);
+           setTable(_table);
        }
        public void setParty(int _count){
             List<Customer> _Customers = new List<Customer>();
@@ -86,6 +102,13 @@ namespace Library
                 _Customers.Add(new Customer(i));
             }
            this.Customers = _Customers;
+       }
+       
+       public void setWaiting(Boolean _waiting){
+           this.waiting = _waiting;
+       }
+       public void setTable(Table _table){
+           this.table = _table;
        }
 
        public List<Customer> getParty(){
@@ -115,16 +138,37 @@ namespace Library
 
     public class Table{
         private int number {get; set;}
+        private int size {get;set;}
+        private Boolean available {get;set;}
 
-        public Table(int _number){
+        public Table(int _number, int _size){
             setNumber(_number);
+            setSize(_size);
+            setAvailable(true);
+        }
+
+        public void Print (){
+            Console.WriteLine ("\n" + "Table: ");
+            Console.WriteLine("Table Number: " + this.getNumber());
+            Console.WriteLine("Table Size: " + this.getSize());
+        }
+        public void setNumber(int _number){
+            this.number = _number;
+        }
+        public void setSize(int _size){
+            this.size = _size;
+        }
+
+        public void setAvailable(Boolean _available){
+            this.available = _available;
         }
 
         public int getNumber(){
             return this.number;
         }
-        public void setNumber(int _number){
-            this.number = _number;
+
+        public int getSize(){
+            return this.size;
         }
 
     }
