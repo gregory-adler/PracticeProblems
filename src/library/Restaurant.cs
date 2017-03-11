@@ -1,4 +1,4 @@
-namespace Library{
+namespace Deprecated{
     using System;
     using System.Collections.Generic;
 

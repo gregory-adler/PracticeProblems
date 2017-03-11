@@ -7,8 +7,8 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            ClassPractice test = new ClassPractice();
-            test.testMethod();
+            Server test = new Server("john", 5);
+            Console.WriteLine(test.getAge());
         }
     }
 }
