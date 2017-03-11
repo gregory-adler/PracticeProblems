@@ -8,13 +8,15 @@ namespace Library
     public class Restaurant
     {
         private List<Employee> Employees = new List<Employee>();
-        public void Restauarant()
+        public void Restauarant(List<Employee> _Empoloyees, string name)
         {
 
         }
         public void Print()
         {
-            Console.WriteLine("TestMethod");
+           foreach (Employee employee in Employees){
+                employee.Print();
+            }
 
         }
     }
