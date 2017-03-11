@@ -75,10 +75,52 @@ namespace Library
     }
 
     public class Party{
+       private List <Customer> Customers {get;set;}
+
+       public Party(int _count){
+           setParty(_count);
+       }
+       public void setParty(int _count){
+       }
+
+       public List<Customer> getParty(){
+           return this.Customers;
+       }
+
+       public void Print(){
+           Console.WriteLine ("\n" + "Party");
+           Console.WriteLine("Party size: " + this.Customers.Count);
+       }
         
     }
+    public class Customer {
+        private int number;
+
+        public Customer(int _number){
+            setNumber(_number);
+        }
+        public void setNumber(int _number){
+            this.number = _number;
+        }
+        public int getNumber(){
+            return this.number;
+        }
+
+        }
 
     public class Table{
+        private int number {get; set;}
+
+        public Table(int _number){
+            setNumber(_number);
+        }
+
+        public int getNumber(){
+            return this.number;
+        }
+        public void setNumber(int _number){
+            this.number = _number;
+        }
 
     }
 }
