@@ -7,6 +7,13 @@ namespace ConsoleApplication
     {
         public static void Main(string[] args)
         {
+            IPAddress test = new IPAddress();
+            string testString = "255.13.145.2";
+
+            Console.WriteLine(test.ValidIPAddress(testString));
+        }
+
+        public static void testRestaurant() { 
             Console.WriteLine("Hello World!");
             List<Employee> _Employees = new List<Employee>();
             List<Table> _Tables  = new List<Table>();
