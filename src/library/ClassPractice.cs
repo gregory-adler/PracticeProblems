@@ -9,14 +9,29 @@ namespace Library
         private List<Employee> Employees {get;set;}
         private List<Party> Parties {get;set;}
         private List<Table> Tables {get; set;}
-        public void Restauarant(string _name, List<Employee> _Employees, List<Party> _Parties, List<Table> _Tables)
-        {
 
+        public Restaurant(string _name, List<Employee> _Employees, List<Party> _Parties, List<Table> _Tables)
+        {
+            this.name = _name;
+            this.Employees = _Employees;
+            this.Parties = _Parties;
+            this.Tables = _Tables;
         }
         public void Print()
         {
-           foreach (Employee employee in Employees){
+            Console.WriteLine("Employees");
+            foreach (Employee employee in Employees){
                 employee.Print();
+            }
+            Console.WriteLine("Parties");
+            foreach (Party party in Parties)
+            {
+                party.Print();
+            }
+            Console.WriteLine("Tables");
+            foreach (Table table in Tables)
+            {
+                table.Print();
             }
 
         }
@@ -63,7 +78,7 @@ namespace Library
             Console.WriteLine();
         }
     }
-    public class Server :Employee
+    public class Server:Employee
     {
         private Table table {get;set;}
         public Server(string _name, int _age)
@@ -79,6 +94,16 @@ namespace Library
         }
         public Table getTable(){
             return this.table;
+        }
+    }
+
+    public class Host : Employee
+    {
+        public Host(string _name, int _age)
+        {
+            setName(_name);
+            setAge(_age);
+            setType("Host");
         }
     }
 
@@ -111,13 +136,24 @@ namespace Library
            this.table = _table;
        }
 
-       public List<Customer> getParty(){
+       public List<Customer> getCustomers(){
            return this.Customers;
        }
+        public Table getTable(){
+            return this.table;
+        }
 
        public void Print(){
            Console.WriteLine ("\n" + "Party");
            Console.WriteLine("Party size: " + this.Customers.Count);
+           if (this.waiting)
+            {
+                Console.WriteLine("Waiting");
+            }
+           else {
+                Console.WriteLine("Table: " + this.table.getNumber());
+            }
+            Console.WriteLine();
        }
         
     }
@@ -140,6 +176,7 @@ namespace Library
         private int number {get; set;}
         private int size {get;set;}
         private Boolean available {get;set;}
+        private Party party { get; set; }
 
         public Table(int _number, int _size){
             setNumber(_number);
@@ -163,6 +200,10 @@ namespace Library
             this.available = _available;
         }
 
+        public void setParty(Party _party)
+        {
+            this.party = _party;
+        }
         public int getNumber(){
             return this.number;
         }
