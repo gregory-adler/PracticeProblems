@@ -5,25 +5,55 @@
 
     public class IPAddress
     {
-        public Boolean ValidIPAddress(string address)
+        public String ValidIPAddress(string IP)
         {
-            Console.WriteLine("IPAddress: " + address + "\n");
+            Console.WriteLine("IPAddress: " + IP + "\n");
 
             Boolean result;
 
-            foreach (char letter in address){
+            int periodCount = 0;
+            int colonCount = 0;
+            for (int i = 0; i < IP.Length; i++) {
+                if (IP[i].Equals('.'))
+                {
+                    if (i == 0 || i == IP.Length - 1)
+                        return "Neither";
+                    periodCount++;
+                }
+
+
+                if (IP[i].Equals(':'))
+                {
+                    if (i == 0 || i == IP.Length - 1)
+                        return "Neither";
+                    colonCount++;
+                }
+                   
+            }
+
+            if (!(colonCount == 7 ^ periodCount == 3) || !(colonCount > 0 ^ periodCount > 0))
+                return "Neither";
+
+            foreach (char letter in IP){
                 if (letter == '.')
                 {
-                    result = IPV4(address);
-                    return result;
+                    result = IPV4(IP);
+                    if (result)
+                    {
+                        return "IPv4";
+                    }
+                    else
+                    {
+                        return "Neither";
+                    }
                 }
                 if (letter == ':')
                 {
-                    result = IPV6(address);
-                    return result;
+                    result = IPV6(IP);
+                    return "IPv6";
                 }
             }
-            return false;
+            return "Neither";
         }
         public Boolean IPV4(string address)
         {
@@ -45,52 +75,88 @@
                     break;
                 }
             }
-
             Console.WriteLine("remainder: " + remainderString);
             Console.WriteLine("test: " + testString + "\n");
+
+              if (testString.Length > 1 && testString[0] == '0'){
+                Console.WriteLine("returns false here");
+                return false;
+            }
 
             if (testString == null)
             {
                 testString = address;
             }
 
-            Boolean LeadingZeroes = true;
-            for (int i = 0; i< testString.Length; i++)
+            if (testString[0] == '0' && testString.Length > 1)
             {
-                // Leading Zeroes
-                if (testString[i] != '0')
-                {
-                    LeadingZeroes = false;
-                }
-                if (testString[i] == '0')
-                {
-                    if (LeadingZeroes && i != 0)
-                    {
-                        Console.WriteLine("Leading Zeroes");
-                        return false;
-                    }
-                }
+                return false;
+            }
+
+            for (int i = 0; i < testString.Length; i++)
+            {
 
                 //Number check
-               if (!(testString[i] >='0' && testString[i] <= '9'))
+                if (!(Char.IsDigit(testString[i])))
                 {
                     return false;
                 }
+            }
 
-               int number = Int32.Parse(testString);
+                int number;
+            if (!Int32.TryParse(testString, out number))
+                return false;
                if (!(number >= 0 && number <= 255))
                 {
                     Console.WriteLine("NumberCheck");
                     return false;
                 }
 
-            }
 
            return IPV4(remainderString);
         }
         public Boolean IPV6(string address)
         {
-            return true;
+            Console.WriteLine("IPV6" + "\n");
+            if (address.Length == 0)
+            {
+                return true;
+            }
+
+            string remainderString = "";
+            string testString = null;
+
+            for (int i = 0; i < address.Length; i++)
+            {
+                if (address[i] == ':')
+                {
+                    remainderString = address.Substring(i + 1);
+                    testString = address.Substring(0, i);
+                    break;
+                }
+            }
+
+            if (testString == null)
+            {
+                testString = address;
+            }
+
+            Console.WriteLine("remainder: " + remainderString);
+            Console.WriteLine("test: " + testString + "\n");
+
+            if (testString.Length > 4)
+            {
+                return false;
+            }
+
+
+            if(!(System.Text.RegularExpressions.Regex.IsMatch(testString, @"\A\b[0-9a-fA-F]+\b\Z")))
+            {
+                Console.WriteLine("Regex Check");
+                return false;
+            }
+
+            return IPV6(remainderString);
         }
     }
 }

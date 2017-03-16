@@ -8,9 +8,10 @@ namespace ConsoleApplication
         public static void Main(string[] args)
         {
             IPAddress test = new IPAddress();
-            string testString = "255.13.145.2";
+            string testString = "192.0.0.1";
 
             Console.WriteLine(test.ValidIPAddress(testString));
+
         }
 
         public static void testRestaurant() { 
