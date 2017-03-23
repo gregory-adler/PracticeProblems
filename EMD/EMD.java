@@ -143,7 +143,6 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	else {
         		return getRecur(key, root.left);
         	}
-
         }
         else {
         	return root.kv.value;
@@ -182,7 +181,61 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     // Note that key does not have to exist in the database.
     public K next(K key) {
         // TODO: Implement me(EC for intermediate score)
-        return null;
+        Node candidate = new Node();
+        if (root == null){
+        	return null;
+        }
+        int compare = root.kv.key.compareTo(key);
+        // if Node is larger than key, set as potential answer and go left
+        // checking to to see if there is a smaller node that is also larger than key, else the candidate is the answer
+        if (compare > 0 ){
+        	if (root.left == null){
+        		return root.kv.key;
+        	}
+        	else {
+        		candidate = root;
+        		return nextRecur(key, root.left, candidate);
+        	}
+        }
+
+        // if current node is less than key, go right to see if there is a node that is greater than key
+        // if there is no right and there is no candidate return null
+        else {
+        	if (root.right == null){
+        		return null;
+        	}
+        	else {
+        		return nextRecur(key, root.right, candidate);
+        	}
+        }
+    }
+
+    public K nextRecur (K key, Node node, Node candidate){
+    	int compare = node.kv.key.compareTo(key);
+
+    	if (compare > 0){
+    		candidate = node;
+    		if (node.left ==null){
+    			return candidate.kv.key;
+    		}
+    		else {
+    			return nextRecur(key, node.left, candidate);
+
+    		}
+    	}
+    	else {
+    		if (node.right == null){
+    			if (candidate != null){
+    				return candidate.kv.key;
+    			}
+    			else {
+    				return null;
+    			}
+    		}
+    		else {
+    			return nextRecur(key, node.right, candidate);
+    		}
+    	}
     }
 
     // Return a list of key-value pairs in the RangeMap that are between the
