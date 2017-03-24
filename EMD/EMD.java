@@ -253,8 +253,172 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     // the RangeMap. Does nothing if the key does not exist. 
     // Extra Credit beyond 100%
     public void remove(K key) {
-        // TODO: Implement me(EC beyond full score)
+    	System.out.println("Start \n" );
+        if (root == null){
+        	return;
+        }
+        int compare = root.kv.key.compareTo(key);
+
+        // current node is less than value to replace go right
+        if (compare < 0){
+        	if (root.right == null){
+        		return;
+        	}
+        	else {
+        		System.out.println("First method - going right \n" );
+        		recurRemove (root.right, root, null, false, key);
+        		return;
+        	}
+        }
+         // current node is greater than value to replace go left
+        else if (compare > 0){
+        	if (root.left == null){
+        		return;
+        	}
+        	else {
+        		System.out.println("First method - going left \n" );
+        		recurRemove(root.left, root, null, false, key);
+        		return;
+        	}
+        }
+         // current node equals value to replace go right, then all the way left
+        else{
+        	// if root matches and no right subtree, root.left becomes root
+        	if (root.right == null){
+        		root = root.left;
+        		return;
+        	}
+        	else {
+        		recurRemove(root.right, root, root, false, key);
+        		return;
+        	}
+        }
     }
+
+    public void recurRemove(Node currentNode, Node priorNode, Node replaceNode, boolean noNode, K key){
+
+    	// node does not exist do nothing and return
+    	if (noNode){
+    		return;
+    	}
+    	// node not yet found, find node
+    	if (replaceNode == null){
+    		System.out.println("Recur Method - Node not yet found \n" );
+    		int compare = currentNode.kv.key.compareTo(key);
+
+    		// key greater than current node, go right
+    		if (compare < 0) {
+    			if (currentNode.right == null){
+    				System.out.println("Recur Method - right is null so ending \n" );
+    				recurRemove(currentNode, null, null, true, key);
+    				return;
+    			}
+    			else {
+    				System.out.println("Recur Method - Node not yet found - going right \n" );
+    				recurRemove(currentNode.right, currentNode, null, false, key);
+    				return;
+    			}
+        	}
+
+        	// current node is greater than value to replace go left
+        	else if (compare > 0){
+        		if (currentNode.left == null){
+        			System.out.println("Recur Method - left is null so ending \n" );
+        			recurRemove(currentNode, null, null, true, key);
+        			return;
+        		}
+        		else {
+        			System.out.println("Recur Method - Node not yet found - going left \n" );
+        			recurRemove(currentNode.left, currentNode, null, false, key);
+        			return;
+        		}
+        	}
+        	// node found
+        	else {
+        		System.out.println("Recur Method - Node Found \n" );
+        		if (currentNode.left != null){
+        			System.out.println ("Left : ");
+        			System.out.println(currentNode.left.kv.value);
+        		}
+        		if (currentNode.right != null){
+        			System.out.println ("Right : ");
+        			System.out.println(currentNode.right.kv.value);
+        		}
+        		recurRemove(currentNode, priorNode, currentNode, false, key);
+        		return;
+        	}
+        }
+
+         // replaceNode found, go right, then all the way left
+        else{
+        	System.out.println("Value : " + replaceNode.kv.value + "\n");
+        	// if node matches and no subtrees - its just a leaf and can be deleted
+        	if (replaceNode.right == null && replaceNode.left == null){
+        		System.out.println("Its a leaf \n" );
+        		int compareParent = replaceNode.kv.key.compareTo(priorNode.kv.key);
+        		// if replace node is less than parent
+        		if (compareParent <= 0){
+        			priorNode.left = null;
+        			return;
+
+        		}
+        			
+        		// if replace node is greater than parent
+        		else if (compareParent >=0){
+        			priorNode.right = null;
+        			return;
+
+        		}
+        	}
+        	// node matches, and node has one subtree
+        	else if (replaceNode.left == null || replaceNode.right == null){
+        		System.out.println("It has one subtree \n");
+        		Node subtree = new Node(); 
+        		if (replaceNode.left == null){
+        			subtree = replaceNode.right;
+        		}
+        		else {
+        			subtree = replaceNode.left;
+        		}
+        		int compareParent = currentNode.kv.key.compareTo(priorNode.kv.key);
+        		
+        		// if current node is less than parent
+        		if (compareParent <= 0){
+        			priorNode.left = subtree;
+        			return;
+
+        		}
+        		// if current node is greater than parent
+        		else if (compareParent >=0){
+        			priorNode.right = subtree;
+        			return;
+        		}
+        	}	
+
+        	// node matches and there is a right and left subtree 
+        	else {
+        		currentNode.kv.value = findReplacement(currentNode.right, currentNode);
+        		return;
+        	}
+    }
+}
+
+	public V findReplacement(Node currentNode, Node previousNode){
+		if (currentNode.left == null){
+			int compareParent = currentNode.kv.key.compareTo(previousNode.kv.key);
+			if (compareParent <=0){
+				previousNode.left = null;
+			}
+			else if (compareParent >=0){
+				previousNode.right = null;
+			}
+
+			return currentNode.kv.value;
+		}
+		else {
+			return findReplacement(currentNode.left, currentNode);
+		}
+	}
 
     /////////////////////////////////////////////////
     // You shouldn't have to change anything below //
