@@ -406,7 +406,8 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         		currentNode.kv= findReplacement(currentNode.right, currentNode);
         
 
-        		System.out.println("newNode: " + currentNode.kv.value);
+        		System.out.println("newNode");
+        		System.out.println("key: " + currentNode.kv.key + " value:  " + currentNode.kv.value);
         		if (currentNode.left != null){
         			System.out.println ("Left : ");
         			System.out.println(currentNode.left.kv.value);
@@ -424,16 +425,27 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
 		if (currentNode.left == null){
 			System.out.println("value being replaced: " + currentNode.kv.key );
 			int compareParent = currentNode.kv.key.compareTo(previousNode.kv.key);
-			if (compareParent <=0){
-				previousNode.left = null;
+			if (compareParent <0){
+				if (currentNode.right != null){
+					previousNode.left = currentNode.right;
+				}
+				else{
+					previousNode.left = null;
+				}
+				return currentNode.kv;
 			}
-			else if (compareParent >=0){
-				previousNode.right = null;
+			else {
+				if (currentNode.right != null){
+					previousNode.right = currentNode.right;
+				}
+				else {
+					previousNode.right = null;
+				}
+				return currentNode.kv;
 			}
-			return currentNode.kv;
 		}
 		else {
-			return findReplacement(currentNode.left, currentNode);
+			return (findReplacement(currentNode.left, currentNode));
 		}
 	}
 
