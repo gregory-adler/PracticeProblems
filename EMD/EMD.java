@@ -311,7 +311,7 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	}
         	else {
         		System.out.println("First method - going right \n" );
-        		recurRemove (root.right, root, null, false, key);
+        		recurRemove (root.right, root, null, key);
         		return;
         	}
         }
@@ -322,7 +322,7 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	}
         	else {
         		System.out.println("First method - going left \n" );
-        		recurRemove(root.left, root, null, false, key);
+        		recurRemove(root.left, root, null, key);
         		return;
         	}
         }
@@ -334,18 +334,15 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         		return;
         	}
         	else {
-        		recurRemove(root.right, root, root, false, key);
+        		recurRemove(root.right, root, root, key);
         		return;
         	}
         }
     }
 
-    public void recurRemove(Node currentNode, Node priorNode, Node replaceNode, boolean noNode, K key){
+    public void recurRemove(Node currentNode, Node priorNode, Node replaceNode, K key){
 
-    	// node does not exist do nothing and return
-    	if (noNode){
-    		return;
-    	}
+
     	// node not yet found, find node
     	if (replaceNode == null){
     		System.out.println("Recur Method - Node not yet found \n" );
@@ -355,12 +352,11 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     		if (compare < 0) {
     			if (currentNode.right == null){
     				System.out.println("Recur Method - right is null so ending \n" );
-    				recurRemove(currentNode, null, null, true, key);
     				return;
     			}
     			else {
     				System.out.println("Recur Method - Node not yet found - going right \n" );
-    				recurRemove(currentNode.right, currentNode, null, false, key);
+    				recurRemove(currentNode.right, currentNode, null, key);
     				return;
     			}
         	}
@@ -369,12 +365,11 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	else if (compare > 0){
         		if (currentNode.left == null){
         			System.out.println("Recur Method - left is null so ending \n" );
-        			recurRemove(currentNode, null, null, true, key);
         			return;
         		}
         		else {
         			System.out.println("Recur Method - Node not yet found - going left \n" );
-        			recurRemove(currentNode.left, currentNode, null, false, key);
+        			recurRemove(currentNode.left, currentNode, null, key);
         			return;
         		}
         	}
@@ -390,7 +385,7 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         			System.out.println ("Right : ");
         			System.out.println(currentNode.right.kv.value);
         		}
-        		recurRemove(currentNode, priorNode, currentNode, false, key);
+        		recurRemove(currentNode, priorNode, currentNode, key);
         		return;
         	}
         }
