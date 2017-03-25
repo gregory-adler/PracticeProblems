@@ -246,9 +246,41 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     // end have to exist in the database.
     public List<KVPair<K,V>> range(K start, K end) {
         // TODO: Implement me(EC for full score)
-        return null;
+        if (root == null){
+        	return null;
+        }
+        List<KVPair<K,V>> answer = new ArrayList<KVPair<K,V>>(); 
+        int compareStart= root.kv.key.compareTo(start); 
+        int compareEnd = root.kv.key.compareTo(end);
+
+        rangeRecur(root.left, answer, start, end);
+
+        if (compareStart >=0 && compareEnd <=0){
+        	answer.add(root.kv);
+        } 
+        rangeRecur(root.right, answer, start, end);
+
+        return answer;
     }
 
+    public void rangeRecur(Node currentNode, List<KVPair<K,V>> answer, K start, K end){
+    	
+    	if (currentNode == null){
+    		return;
+    	}
+    	int compareStart= currentNode.kv.key.compareTo(start); 
+        int compareEnd = currentNode.kv.key.compareTo(end);
+
+    	rangeRecur(currentNode.left, answer, start, end);
+
+    	 if (compareStart >=0 && compareEnd <=0){
+    	 	answer.add(currentNode.kv);
+    	 }
+
+    	 rangeRecur(currentNode.right, answer, start, end);
+
+
+    }
     // Removes the key-value pair with key specified by the parameter from
     // the RangeMap. Does nothing if the key does not exist. 
     // Extra Credit beyond 100%
