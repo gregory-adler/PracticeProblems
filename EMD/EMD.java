@@ -461,6 +461,88 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     }
 }
 
+
+	public void removeSimplified(K key){
+		if (root == null){
+			return;
+		}
+
+		int compare = root.kv.key.compareTo(key);
+
+		// case found, remove element
+		if (compare ==0){
+			removeRecurSimplified(root, key);
+		}
+
+		// key is bigger than item, look left
+		else if (compare > 0){
+			root.left = removeRecurSimplified(root.left, key);
+		}
+
+		// key is less than item, look right
+		else {
+			root.right = removeRecurSimplified(root.right, key);
+		}
+	}
+
+	public Node removeRecurSimplified(Node currentNode, K key){
+		
+		// base case - element does not exist, return
+		if (currentNode == null){
+			return null;
+		}
+
+		int compare = currentNode.kv.key.compareTo(key);
+
+		// element to remove found
+		if (compare ==0){
+			// no right subtree, left subtree becomes new pointer, if no left subtree pointer is null (leaf)
+			if (currentNode.right ==null){
+				return currentNode.left;
+			}
+			// right subtree has no left child, move the currentNode left subtree to currentNode.right.left
+			if (currentNode.right.left == null){
+				currentNode.right.left = currentNode.left;
+				return currentNode.right;
+			}
+
+			// has a right and left node
+			Node temp = new Node();
+			temp = currentNode.right;
+
+			// look for smallest node in the right subtree 
+			while (temp.left.left != null){
+				temp = temp.left;
+			}
+			// that becomes root
+			Node becomesRoot = new Node();
+			becomesRoot = temp.left;
+
+			// handles if replacement node has a right subtree
+			temp.left = becomesRoot.right;
+
+			// gives the replacemenent the currentNode right and currentNode left
+			becomesRoot.right = currentNode.right;
+			becomesRoot.left = currentNode.left;
+
+			return becomesRoot;
+		}
+
+
+		// element not found, look right
+		else if (compare <0){
+			currentNode.right = removeRecurSimplified(currentNode.right, key);
+			return currentNode;
+		}
+
+		// element not found look, left
+		else {
+			currentNode.left = removeRecurSimplified(currentNode.left, key);
+			return currentNode;
+		}
+
+	}
+
 	public KVPair<K,V> findReplacement(Node currentNode, Node previousNode){
 		if (currentNode.left == null){
 			System.out.println("value being replaced: " + currentNode.kv.key );
