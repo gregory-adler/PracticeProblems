@@ -336,6 +336,7 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	// node found
         	else {
         		System.out.println("Recur Method - Node Found \n" );
+        		System.out.println("Value : " + currentNode.kv.value + "\n");
         		if (currentNode.left != null){
         			System.out.println ("Left : ");
         			System.out.println(currentNode.left.kv.value);
@@ -349,9 +350,10 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         	}
         }
 
-         // replaceNode found, go right, then all the way left
+         // replaceNode found, go right, then all the way left if possible
         else{
-        	System.out.println("Value : " + replaceNode.kv.value + "\n");
+        	System.out.println("starting replace");
+
         	// if node matches and no subtrees - its just a leaf and can be deleted
         	if (replaceNode.right == null && replaceNode.left == null){
         		System.out.println("Its a leaf \n" );
@@ -370,15 +372,18 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
 
         		}
         	}
+
         	// node matches, and node has one subtree
         	else if (replaceNode.left == null || replaceNode.right == null){
         		System.out.println("It has one subtree \n");
         		Node subtree = new Node(); 
         		if (replaceNode.left == null){
-        			subtree = replaceNode.right;
+        			System.out.println("Adding subtree to right: " + priorNode.kv.key + "\n");
+        			subtree = priorNode.right;
         		}
         		else {
-        			subtree = replaceNode.left;
+        			System.out.println("Adding subtree to left: " + priorNode.kv.key + "\n");
+        			subtree = priorNode.left;
         		}
         		int compareParent = currentNode.kv.key.compareTo(priorNode.kv.key);
         		
@@ -397,14 +402,27 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
 
         	// node matches and there is a right and left subtree 
         	else {
-        		currentNode.kv.value = findReplacement(currentNode.right, currentNode);
+        		System.out.println("It has two subtrees \n");
+        		currentNode.kv= findReplacement(currentNode.right, currentNode);
+        
+
+        		System.out.println("newNode: " + currentNode.kv.value);
+        		if (currentNode.left != null){
+        			System.out.println ("Left : ");
+        			System.out.println(currentNode.left.kv.value);
+        		}
+        		if (currentNode.right != null){
+        			System.out.println ("Right : ");
+        			System.out.println(currentNode.right.kv.value);
+        		}
         		return;
         	}
     }
 }
 
-	public V findReplacement(Node currentNode, Node previousNode){
+	public KVPair<K,V> findReplacement(Node currentNode, Node previousNode){
 		if (currentNode.left == null){
+			System.out.println("value being replaced: " + currentNode.kv.key );
 			int compareParent = currentNode.kv.key.compareTo(previousNode.kv.key);
 			if (compareParent <=0){
 				previousNode.left = null;
@@ -412,8 +430,7 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
 			else if (compareParent >=0){
 				previousNode.right = null;
 			}
-
-			return currentNode.kv.value;
+			return currentNode.kv;
 		}
 		else {
 			return findReplacement(currentNode.left, currentNode);

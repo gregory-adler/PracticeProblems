@@ -1,6 +1,8 @@
 add/Mary Poppins/Two children, neglected by parents who are consumed with their business and political goals, find themselves in peril as two strangers lead them on a chase across London rooftops.
 add/Toy Story/Brainwashed animated playthings are abandoned by their slave master and sent to a camp where they are abused and imprisoned by their peers.
 add/Aladdin/A delinquent and his pet steal treasure and use it to kidnap a princess. Stockholm syndrome ensues in this whole new world.
+add/ZMOVIE /This Movie starts with a Z
+add/SMOVIE /This Movie starts with a S
 next/aardvark
 next/beetlejuice
 find/aardvark/zyzzyva
