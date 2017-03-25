@@ -253,12 +253,18 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
         int compareStart= root.kv.key.compareTo(start); 
         int compareEnd = root.kv.key.compareTo(end);
 
-        rangeRecur(root.left, answer, start, end);
-
+        // if the current node is not less than the start, go left
+        if (!(compareStart <0)){
+        	rangeRecur(root.left, answer, start, end);
+		}
         if (compareStart >=0 && compareEnd <=0){
         	answer.add(root.kv);
         } 
-        rangeRecur(root.right, answer, start, end);
+
+         // if the current node is not greater than the end, go right
+    	if (!(compareEnd >0)){
+        	rangeRecur(root.right, answer, start, end);
+        }
 
         return answer;
     }
@@ -271,13 +277,20 @@ class EMD<K extends Comparable<K>, V> implements RangeMap<K,V> {
     	int compareStart= currentNode.kv.key.compareTo(start); 
         int compareEnd = currentNode.kv.key.compareTo(end);
 
-    	rangeRecur(currentNode.left, answer, start, end);
+        // if the current node is not less than the start, go left
+        if (!(compareStart <0)){
+
+    		rangeRecur(currentNode.left, answer, start, end);
+    	}
 
     	 if (compareStart >=0 && compareEnd <=0){
     	 	answer.add(currentNode.kv);
     	 }
 
-    	 rangeRecur(currentNode.right, answer, start, end);
+    	 // if the current node is not greater than the end, go right
+    	 if (!(compareEnd >0)){
+    	 	rangeRecur(currentNode.right, answer, start, end);
+    	}
 
 
     }
