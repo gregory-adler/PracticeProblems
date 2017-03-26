@@ -20,7 +20,7 @@ class LRUCache(object):
 		nextNode = node.next
 
 		previous.next = nextNode
-		nextNode.previous = previous
+		nextNode.prev = previous
 
 	def headNode(self, node):
 		self.deleteNode(node)
@@ -28,6 +28,7 @@ class LRUCache(object):
 
 	def popTail(self):
 		node = self.tail.prev
+		print "tail is " + str(node.value)
 		self.deleteNode(node)
 		return node
 
@@ -83,12 +84,21 @@ class LRUCache(object):
 				self.count -=1
         
 
-capacity = 4
+def printHead(obj):
+	print "Printing Linked List"
+	node = obj.head.next;
+	while (node.next !=None):
+		print "key: " + str(node.key)
+		print "value: " + str(node.value)
+		print "next" + str(node.next)
+		node = node.next
+
+capacity = 2
 obj = LRUCache(capacity)
-obj.put(4,3)
-obj.put(5,3)
-obj.put(2,3)
-obj.put(1,3)
-obj.put(6,3)
+obj.put(1,1)
+obj.put(2,2)
+obj.get(1)
+printHead(obj)
+obj.put(3,3)
 #obj.put(7,3)
 # param_1 = obj.get(4)
