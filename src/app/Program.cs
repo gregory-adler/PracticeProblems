@@ -7,7 +7,9 @@ namespace ConsoleApplication
     {
         public static void Main(string[] args)
         {
-            testRestaurant();
+            String s = "1 ";
+            stringReverse test = new stringReverse();
+            Console.WriteLine(test.reverseWords(s));
 
         }
 
