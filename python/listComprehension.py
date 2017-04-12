@@ -1,7 +1,4 @@
-def listPractice():
-	test = ["one", "two", "three", "four", "five"]
-	new_list = [[x.upper(), x.lower(), len(x)] for x in test]
-	for x in new_list:
-		print x
+test = [x * 2 for x in rnage (1,10)]
 
-listPractice();
+for y in test:
+	print y
