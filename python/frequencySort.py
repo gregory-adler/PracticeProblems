@@ -48,6 +48,17 @@ def secondTree(secondTreeRoot, currentNode, value):
 			currentNode.right = Node(ordinance, 1)
 
 
+def iterateTree(currentNode):
+	if (currentNode.left != None):
+		iterateTree(currentNode.left)
+	elif (currentNode.right != None):
+		iterateTree(currentNode.right)
+
+
+	print "key: " + str(currentNode.key)
+	print "value: " + str(currentNode.value)
+
+
 def frequencySort(s):
 	root = Node(ord(s[0]), 1)
 	for i in range (1, len(s)):
@@ -55,8 +66,9 @@ def frequencySort(s):
 		insertNode(root, ordinance)
 
 	secondTreeRoot = Node(root.value, root.key)
-
 	createSecondTree(root, secondTreeRoot)
+
+	iterateTree(root)
 
 s = "eeees"
 frequencySort(s)
