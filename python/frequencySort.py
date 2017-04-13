@@ -14,7 +14,7 @@ def insertNode(currentNode, ordinance):
 			currentNode.left = Node(ordinance, 1)
 	elif (ordinance > currentNode. key):
 		if (currentNode.right != None):
-			insertNode(currentNode.right)
+			insertNode(currentNode.right, ordinance)
 		else:
 			currentNode.right = Node(ordinance, 1)
 	# key = vvalue
@@ -28,33 +28,22 @@ def createSecondTree(currentNode, secondTreeRoot):
 	elif (currentNode.right != None):
 		createSecondTree(currentNode.right, secondTreeRoot)
 
-	print "adding"
-	print "key: " 
-	print currentNode.value
-	print "letter: "
-	print currentNode.key
-	print "\n"
 	addSecondTree(secondTreeRoot, currentNode.value, currentNode.key)
 
 def addSecondTree(currentNode, key, letter):
 
-	# if key == root
-	print "key: "
-	print key
-	print "letter: "
-	print letter
-	print "\n"
 	
 	if (key < currentNode.key):
 		if (currentNode.left != None):
 			addSecondTree(currentNode.left, key, letter)
 		else:
 			currentNode.left = Node(key, letter)
-	elif (key > currentNode.key):
+	elif (key >= currentNode.key):
 		if (currentNode.right != None):
 			addSecondTree(currentNode.right, key, letter)
 		else:
 			currentNode.right = Node(key, letter)
+
 
 def iterateTree(currentNode):
 	if (currentNode.left != None):
@@ -66,8 +55,26 @@ def iterateTree(currentNode):
 	print "key: " + str(currentNode.key)
 	print "value: " + str(currentNode.value)
 
-def iterateTreeforAnswer(currentNode, s):
-	print "test"
+def iterateTreeforAnswer(currentNode, answer):
+	print "starting"
+	print chr(currentNode.value)
+	if (currentNode.right != None):
+		print "going right"
+		answer= iterateTreeforAnswer(currentNode.right, answer)
+	
+	for i in range (0, currentNode.key):
+		print i
+		answer += chr(currentNode.value)
+		print answer
+
+	
+	if (currentNode.left != None):
+		print "going left"
+		answer= iterateTreeforAnswer(currentNode.left, answer)
+
+	print "returning"
+	print answer
+	return answer
 
 
 def frequencySort(s):
@@ -81,12 +88,11 @@ def frequencySort(s):
 	iterateTree(root)
 	print "\n"
 
-	print "second creating"
 	secondTreeRoot = Node(root.value, root.key)
 	createSecondTree(root, secondTreeRoot)
-	print "second tree"
-	iterateTree(secondTreeRoot)
-	iterateTreeforAnswer(secondTreeRoot, "")
 
-s = "eeees"
+	answer = iterateTreeforAnswer(secondTreeRoot, "")
+	print answer
+
+s = "test123444455466499"
 frequencySort(s)
