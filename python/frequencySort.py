@@ -19,34 +19,42 @@ def insertNode(currentNode, ordinance):
 			currentNode.right = Node(ordinance, 1)
 	# key = vvalue
 	else:
-		print "same condition"
 		currentNode.value += 1
 
 def createSecondTree(currentNode, secondTreeRoot):
+
 	if (currentNode.left != None):
 		createSecondTree(currentNode.left, secondTreeRoot)
 	elif (currentNode.right != None):
 		createSecondTree(currentNode.right, secondTreeRoot)
-	secondTree(secondTreeRoot, currentNode, currentNode.value)
 
-def secondTree(secondTreeRoot, currentNode, value):
+	print "adding"
+	print "key: " 
+	print currentNode.value
+	print "letter: "
+	print currentNode.key
+	print "\n"
+	addSecondTree(secondTreeRoot, currentNode.value, currentNode.key)
 
-	# if value == root
+def addSecondTree(currentNode, key, letter):
 
-	if (secondTreeRoot == currentNode):
-		return
+	# if key == root
+	print "key: "
+	print key
+	print "letter: "
+	print letter
+	print "\n"
 	
-	if (value < currentNode.value):
+	if (key < currentNode.key):
 		if (currentNode.left != None):
-			currentNode = currentNode.left
+			addSecondTree(currentNode.left, key, letter)
 		else:
-			currentNode.left = Node(ordinance, 1)
-	elif (value > currentNode.value):
+			currentNode.left = Node(key, letter)
+	elif (key > currentNode.key):
 		if (currentNode.right != None):
-			currentNode = currentNode.right
+			addSecondTree(currentNode.right, key, letter)
 		else:
-			currentNode.right = Node(ordinance, 1)
-
+			currentNode.right = Node(key, letter)
 
 def iterateTree(currentNode):
 	if (currentNode.left != None):
@@ -58,6 +66,9 @@ def iterateTree(currentNode):
 	print "key: " + str(currentNode.key)
 	print "value: " + str(currentNode.value)
 
+def iterateTreeforAnswer(currentNode, s):
+	print "test"
+
 
 def frequencySort(s):
 	root = Node(ord(s[0]), 1)
@@ -65,10 +76,17 @@ def frequencySort(s):
 		ordinance = ord(s[i])
 		insertNode(root, ordinance)
 
+	print "\n"	
+	print "first tree"
+	iterateTree(root)
+	print "\n"
+
+	print "second creating"
 	secondTreeRoot = Node(root.value, root.key)
 	createSecondTree(root, secondTreeRoot)
-
-	iterateTree(root)
+	print "second tree"
+	iterateTree(secondTreeRoot)
+	iterateTreeforAnswer(secondTreeRoot, "")
 
 s = "eeees"
 frequencySort(s)
