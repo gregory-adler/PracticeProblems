@@ -76,6 +76,15 @@ def iterateTreeforAnswer(currentNode, answer):
 	print answer
 	return answer
 
+class Heap:
+	count = 0
+	def __init__(self, capacity):
+		self.array = [0] * capacity
+
+	def addHeap(item):
+		return
+
+
 
 def frequencySort(s):
 	root = Node(ord(s[0]), 1)
@@ -83,16 +92,19 @@ def frequencySort(s):
 		ordinance = ord(s[i])
 		insertNode(root, ordinance)
 
-	print "\n"	
-	print "first tree"
-	iterateTree(root)
-	print "\n"
+	#print "\n"	
+	#print "first tree"
+	#iterateTree(root)
+	#print "\n"
 
-	secondTreeRoot = Node(root.value, root.key)
-	createSecondTree(root, secondTreeRoot)
+	heap = Heap(25)
+	print heap.count
 
-	answer = iterateTreeforAnswer(secondTreeRoot, "")
-	print answer
+	# secondTreeRoot = Node(root.value, root.key)
+	# createSecondTree(root, secondTreeRoot)
+
+	# answer = iterateTreeforAnswer(secondTreeRoot, "")
+	# print answer
 
 s = "test123444455466499"
 frequencySort(s)
