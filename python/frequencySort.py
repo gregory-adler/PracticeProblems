@@ -77,12 +77,62 @@ def iterateTreeforAnswer(currentNode, answer):
 	return answer
 
 class Heap:
-	count = 0
+
 	def __init__(self, capacity):
 		self.array = [0] * capacity
+		self.count = 0
 
-	def addHeap(item):
-		return
+	def add(self, item):
+		if (self.count > len(self.array)):
+			return
+		elif (self.count == len(self.array)):
+			doubleHeapSize()
+
+		self.array[self.count] = item
+		self.arrangeHeap(self.count)
+		self.count+=1
+
+
+	def doubleHeapSize(self):
+		newHeap = [0] * len(self.array)*2
+		for i in range (0, len(self.array)):
+			newHeap[i] = self.array[i]
+
+		self.array = newHeap
+
+	def arrangeHeap(self, i):
+		while (i >0):
+			parentIndex = (i-1) / 2
+			if (heap[i] >  heap[parentIndex]):
+				swap(i, parentIndex)
+			else:
+				break
+
+	def swap(self, original, new):
+		temp = self.array[new]
+		self.array[new] = self.array[original]
+		self.array[original] = self.array[new]
+
+	def removeMax(self):
+		toReturn = self.array[0]
+		self.array[0] = self.array[self.count]
+		self.count-=1
+		if (self.count >0):
+			sinkFirstElement(self)
+		return toReturn
+
+	def sinkFirstElement(self):
+		i = 0
+		while((2*i) +1 <count):
+			j = 2 * i + 1
+			if (j+1 < self.count and self.array[j+1] > self.array[j]):
+				j+=1
+			if (j+1 <self.count and self.array(j+1) <= self.array[j]):
+				break
+
+			swap(i, j)
+			i = j
+
 
 
 
@@ -98,6 +148,7 @@ def frequencySort(s):
 	#print "\n"
 
 	heap = Heap(25)
+	heap.add(4)
 	print heap.count
 
 	# secondTreeRoot = Node(root.value, root.key)
