@@ -105,7 +105,7 @@ class Heap:
 
 	def doubleHeapSize(self):
 		newHeap = [0] * len(self.array)*2
-		for i in range (0, len(self.array)):
+		for i in range (0, self.array.count):
 			newHeap[i] = self.array[i]
 
 		self.array = newHeap
@@ -113,17 +113,16 @@ class Heap:
 	def arrangeHeap(self, i):
 		while (i >0):
 			parentIndex = (i-1) / 2
-			currentNode = self.array[i]
-			nextNode = self.array[parentIndex]
-			if (currentNode.value > nextNode.value):
+			if (self.array[i].value > self.array[parentIndex].value):
 				self.swap(i, parentIndex)
+				i = parentIndex
 			else:
 				break
 
 	def swap(self, original, new):
 		temp = self.array[new]
 		self.array[new] = self.array[original]
-		self.array[original] = self.array[new]
+		self.array[original] = temp
 
 	def removeMax(self):
 		toReturn = self.array[0]
@@ -145,9 +144,6 @@ class Heap:
 			swap(i, j)
 			i = j
 
-
-
-
 def frequencySort(s):
 	root = Node(ord(s[0]), 1)
 	for i in range (1, len(s)):
@@ -164,8 +160,10 @@ def frequencySort(s):
 
 	string = ""
 	for i in range (0, len(heap.array)):
-		if (heap.array[i] != 0):
-			for i in range (0, heap.array[i].value):
+		if (heap.array[i]!= 0):
+			print chr(heap.array[i].key)
+			print heap.array[i].value
+			for j in range (0, heap.array[i].value):
 				string += chr(heap.array[i].key)
 
 	print string
@@ -176,5 +174,5 @@ def frequencySort(s):
 	# answer = iterateTreeforAnswer(secondTreeRoot, "")
 	# print answer
 
-s = "test"
+s = "abcdefgab"
 frequencySort(s)
