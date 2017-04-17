@@ -55,6 +55,16 @@ def iterateTree(currentNode):
 	print "key: " + str(currentNode.key)
 	print "value: " + str(currentNode.value)
 
+
+def createHeapFromTree(currentNode, heap):
+	if (currentNode.left != None):
+		createHeapFromTree(currentNode.left, heap)
+	elif (currentNode.right != None):
+		createHeapFromTree(currentNode.right, heap)
+
+
+	heap.add(currentNode)
+
 def iterateTreeforAnswer(currentNode, answer):
 	print "starting"
 	print chr(currentNode.value)
@@ -103,7 +113,7 @@ class Heap:
 	def arrangeHeap(self, i):
 		while (i >0):
 			parentIndex = (i-1) / 2
-			if (heap[i] >  heap[parentIndex]):
+			if (self.array[i] >  self.array[parentIndex]):
 				swap(i, parentIndex)
 			else:
 				break
@@ -148,8 +158,9 @@ def frequencySort(s):
 	#print "\n"
 
 	heap = Heap(25)
-	heap.add(4)
+	createHeapFromTree(root, heap)
 	print heap.count
+	print heap.array[1]
 
 	# secondTreeRoot = Node(root.value, root.key)
 	# createSecondTree(root, secondTreeRoot)
