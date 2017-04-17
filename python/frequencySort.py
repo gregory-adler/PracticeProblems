@@ -113,8 +113,10 @@ class Heap:
 	def arrangeHeap(self, i):
 		while (i >0):
 			parentIndex = (i-1) / 2
-			if (self.array[i] >  self.array[parentIndex]):
-				swap(i, parentIndex)
+			currentNode = self.array[i]
+			nextNode = self.array[parentIndex]
+			if (currentNode.value > nextNode.value):
+				self.swap(i, parentIndex)
 			else:
 				break
 
@@ -135,9 +137,9 @@ class Heap:
 		i = 0
 		while((2*i) +1 <count):
 			j = 2 * i + 1
-			if (j+1 < self.count and self.array[j+1] > self.array[j]):
+			if (j+1 < self.count and self.array[j+1].value > self.array[j].value):
 				j+=1
-			if (j+1 <self.count and self.array(j+1) <= self.array[j]):
+			if (j+1 <self.count and self.array(j+1).value <= self.array[j].value):
 				break
 
 			swap(i, j)
@@ -159,8 +161,14 @@ def frequencySort(s):
 
 	heap = Heap(25)
 	createHeapFromTree(root, heap)
-	print heap.count
-	print heap.array[1]
+
+	string = ""
+	for i in range (0, len(heap.array)):
+		if (heap.array[i] != 0):
+			for i in range (0, heap.array[i].value):
+				string += chr(heap.array[i].key)
+
+	print string
 
 	# secondTreeRoot = Node(root.value, root.key)
 	# createSecondTree(root, secondTreeRoot)
@@ -168,5 +176,5 @@ def frequencySort(s):
 	# answer = iterateTreeforAnswer(secondTreeRoot, "")
 	# print answer
 
-s = "test123444455466499"
+s = "test"
 frequencySort(s)
