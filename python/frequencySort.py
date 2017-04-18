@@ -7,15 +7,21 @@ class Node:
 
 def insertNode(currentNode, ordinance):
 
+	if (chr(ordinance) == 'n'):
+		print "true"
 	if (ordinance < currentNode.key):
 		if (currentNode.left != None):
+			print "going left"
 			insertNode(currentNode.left, ordinance)
 		else:
+			print "adding left"
 			currentNode.left = Node(ordinance, 1)
 	elif (ordinance > currentNode. key):
 		if (currentNode.right != None):
+			print "goign right"
 			insertNode(currentNode.right, ordinance)
 		else:
+			print "adding right"
 			currentNode.right = Node(ordinance, 1)
 	# key = vvalue
 	else:
@@ -48,18 +54,18 @@ def addSecondTree(currentNode, key, letter):
 def iterateTree(currentNode):
 	if (currentNode.left != None):
 		iterateTree(currentNode.left)
-	elif (currentNode.right != None):
+	if (currentNode.right != None):
 		iterateTree(currentNode.right)
 
 
-	print "key: " + str(currentNode.key)
+	print "key: " + chr(currentNode.key)
 	print "value: " + str(currentNode.value)
 
 
 def createHeapFromTree(currentNode, heap):
 	if (currentNode.left != None):
 		createHeapFromTree(currentNode.left, heap)
-	elif (currentNode.right != None):
+	if (currentNode.right != None):
 		createHeapFromTree(currentNode.right, heap)
 
 
@@ -138,7 +144,7 @@ class Heap:
 			j = 2 * i + 1
 			if (j+1 < self.count and self.array[j+1].value > self.array[j].value):
 				j+=1
-			if (j+1 <self.count and self.array(j+1).value <= self.array[j].value):
+			if (self.array[i].value >= self.array[j].value):
 				break
 
 			swap(i, j)
@@ -149,6 +155,8 @@ def frequencySort(s):
 	for i in range (1, len(s)):
 		ordinance = ord(s[i])
 		insertNode(root, ordinance)
+
+	iterateTree(root)
 
 	#print "\n"	
 	#print "first tree"
@@ -164,6 +172,7 @@ def frequencySort(s):
 			print chr(heap.array[i].key)
 			print heap.array[i].value
 			for j in range (0, heap.array[i].value):
+				print chr(heap.array[i].key)
 				string += chr(heap.array[i].key)
 
 	print string
@@ -174,5 +183,5 @@ def frequencySort(s):
 	# answer = iterateTreeforAnswer(secondTreeRoot, "")
 	# print answer
 
-s = "abcdefgab"
+s = "raaeaedere"
 frequencySort(s)
